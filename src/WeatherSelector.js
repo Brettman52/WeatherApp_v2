@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {NavLink} from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -48,19 +48,34 @@ const CastList = styled.div `
     }
 `;
 
-export default class WeatherSelector extends Component {
-    render() {
-        return (
-            <div>
-                <CastList>
-                    <NavLink to='/current'>
-                        Currently
-                    </NavLink>
-                    <NavLink to='/daily'>
-                        Daily
-                    </NavLink>
-                </CastList>
-            </div>
-        )
-    }
+// export default class WeatherSelector extends Component {
+//     render() {
+//         return (
+//             <div>
+//                 <CastList>
+//                     <NavLink to='/current'>
+//                         Currently
+//                     </NavLink>
+//                     <NavLink to='/daily'>
+//                         Daily
+//                     </NavLink>
+//                 </CastList>
+//             </div>
+//         )
+//     }
+// }
+
+export default function WeatherSelector() {
+    return (
+        <div>
+            <CastList>
+                <NavLink to='/current'>
+                    Currently
+                </NavLink>
+                <NavLink to='/daily'>
+                    Daily
+                </NavLink>
+            </CastList>
+        </div>
+    )
 }

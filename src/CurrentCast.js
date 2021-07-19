@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {useContext} from 'react'
 import WeatherContext from './weatherContext'
 import styled from 'styled-components'
 import moment from 'moment'
@@ -93,51 +93,106 @@ const LocalTime = styled.span `
     font-size: 12px;
 `;
 
-export default class DailyCast extends Component {
+// export default class DailyCast extends Component {
 
-    static contextType = WeatherContext;
+//     static contextType = WeatherContext;
+
+//     // Convert extracted time from 24-hour format to 12-hour format
+//     getLastUpdated = (timeDate) => {
+//         const extractedTime = timeDate.split(' ')[1]
+
+//         return moment(extractedTime, "HH:mm::ss").format("h:mmA");
+//     }
+
+
+//     render() {
+//         const lastUpdated = this.getLastUpdated(this.context.weather.current.last_updated);
+//         const currentTemp = Math.trunc(this.context.weather.current.temp_f);
+//         const conditionText = this.context.weather.current.condition.text;
+//         const highTemp = Math.trunc(this.context.weather.forecast.forecastday[0].day.maxtemp_f);
+//         const lowTemp = Math.trunc(this.context.weather.forecast.forecastday[0].day.mintemp_f);
+//         const icon = this.context.weather.current.condition.icon;
+
+//         return (
+//             <Wrap>
+//                 <Location/>
+//                 <WeatherSelector/>
+//                 <WeatherContainer>
+//                     <DataContainer1>
+//                         <AsOf>
+//                             As of {lastUpdated}&nbsp;
+//                             <LocalTime>
+//                                 (local time)</LocalTime>
+//                         </AsOf>
+//                         <Temp>
+//                             {currentTemp}&#176;<DegreeUnits>F</DegreeUnits>
+//                         </Temp>
+//                         <Condition>{conditionText}</Condition>
+//                     </DataContainer1>
+//                     <DataContainer2>
+//                         <ConditionIcon src={icon}/>
+//                         <HighAndLow>{highTemp}&#176;/{lowTemp}&#176;</HighAndLow>
+//                     </DataContainer2>
+//                 </WeatherContainer>
+//             </Wrap>
+//         )
+//     }
+// }
+
+export default function CurrentCast() {
+
+    
+    const weatherContext = useContext(WeatherContext);
+    const {last_updated, temp_f} = weatherContext.weather.current;
+    const {maxtemp_f, mintemp_f} = weatherContext.weather.forecast.forecastday[0].day;
+    const {text, icon} = weatherContext.weather.current.condition;
 
     // Convert extracted time from 24-hour format to 12-hour format
-    getLastUpdated = (timeDate) => {
-        const extractedTime = timeDate.split(' ')[1]
+       const getLastUpdated = (timeDate) => {
+            const extractedTime = timeDate.split(' ')[1]
 
-        return moment(extractedTime, "HH:mm::ss").format("h:mmA");
+            return moment(extractedTime, "HH:mm::ss").format("h:mmA");
     }
 
-    // Test code 53646543 to exhibit conditional rendering based on available
+    // const lastUpdated = getLastUpdated(weatherContext.weather.current.last_updated);
+    // const currentTemp = Math.trunc(weatherContext.weather.current.temp_f);
+    // const conditionText = weatherContext.weather.current.condition.text;
+    // const highTemp = Math.trunc(weatherContext.weather.forecast.forecastday[0].day.maxtemp_f);
+    // const lowTemp = Math.trunc(weatherContext.weather.forecast.forecastday[0].day.mintemp_f);
+    // const icon = weatherContext.weather.current.condition.icon;
+
+    const lastUpdated = getLastUpdated(last_updated);
+    const currentTemp = Math.trunc(temp_f);
+    const conditionText = text;
+    const highTemp = Math.trunc(maxtemp_f);
+    const lowTemp = Math.trunc(mintemp_f);
+    const weatherIcon = icon;
+
+     // Test code 53646543 to exhibit conditional rendering based on available
     // information This code will render the following [city, country] instead of
     // [city, state] because state info is not available in all countries
-
-    render() {
-        const lastUpdated = this.getLastUpdated(this.context.weather.current.last_updated);
-        const currentTemp = Math.trunc(this.context.weather.current.temp_f);
-        const conditionText = this.context.weather.current.condition.text;
-        const highTemp = Math.trunc(this.context.weather.forecast.forecastday[0].day.maxtemp_f);
-        const lowTemp = Math.trunc(this.context.weather.forecast.forecastday[0].day.mintemp_f);
-        const icon = this.context.weather.current.condition.icon;
-
-        return (
-            <Wrap>
-                <Location/>
-                <WeatherSelector/>
-                <WeatherContainer>
-                    <DataContainer1>
-                        <AsOf>
-                            As of {lastUpdated}&nbsp;
-                            <LocalTime>
-                                (local time)</LocalTime>
-                        </AsOf>
-                        <Temp>
-                            {currentTemp}&#176;<DegreeUnits>F</DegreeUnits>
-                        </Temp>
-                        <Condition>{conditionText}</Condition>
-                    </DataContainer1>
-                    <DataContainer2>
-                        <ConditionIcon src={icon}/>
-                        <HighAndLow>{highTemp}&#176;/{lowTemp}&#176;</HighAndLow>
-                    </DataContainer2>
-                </WeatherContainer>
-            </Wrap>
-        )
-    }
+    return (
+        <Wrap>
+        <Location/>
+        <WeatherSelector/>
+        <WeatherContainer>
+            <DataContainer1>
+                <AsOf>
+                    As of {lastUpdated}&nbsp;
+                    <LocalTime>
+                        (local time)</LocalTime>
+                </AsOf>
+                <Temp>
+                    {currentTemp}&#176;<DegreeUnits>F</DegreeUnits>
+                </Temp>
+                <Condition>{conditionText}</Condition>
+            </DataContainer1>
+            <DataContainer2>
+                <ConditionIcon src={weatherIcon}/>
+                <HighAndLow>{highTemp}&#176;/{lowTemp}&#176;</HighAndLow>
+            </DataContainer2>
+        </WeatherContainer>
+    </Wrap>
+    )
 }
+

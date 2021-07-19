@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {useContext} from 'react'
 import WeatherContext from './weatherContext'
 import styled from 'styled-components'
 import WeatherSelector from './WeatherSelector'
@@ -49,31 +49,54 @@ const DayContainer = styled.div `
     align-items: center;
 `;
 
-export default class DailyCast extends Component {
+// export default class DailyCast extends Component {
 
-    static contextType = WeatherContext;
+//     static contextType = WeatherContext;
 
-    render() {
-        const weatherRow = this
-            .context
-            .weather
-            .forecast
-            .forecastday
-            .map((_, i) => <Day key={i} id={i}/>)
+//     render() {
+//         const weatherRow = this
+//             .context
+//             .weather
+//             .forecast
+//             .forecastday
+//             .map((_, i) => <Day key={i} id={i}/>)
 
-        return (
-            <div>
-                <Location/>
-                <WeatherSelector/>
-                <ForecastContainer>
-                    <ForecastHeader>
-                        3-Day Outlook
-                    </ForecastHeader>
-                    <DayContainer>
-                        {weatherRow}
-                    </DayContainer>
-                </ForecastContainer>
-            </div>
-        )
-    }
+//         return (
+//             <div>
+//                 <Location/>
+//                 <WeatherSelector/>
+//                 <ForecastContainer>
+//                     <ForecastHeader>
+//                         3-Day Outlook
+//                     </ForecastHeader>
+//                     <DayContainer>
+//                         {weatherRow}
+//                     </DayContainer>
+//                 </ForecastContainer>
+//             </div>
+//         )
+//     }
+// }
+
+export default function DailyCast() {
+    const weatherContext = useContext(WeatherContext);
+    const weatherRow = weatherContext
+        .weather
+        .forecast
+        .forecastday
+        .map((_, i) => <Day key={i} id={i}/>)
+    return (
+        <div>
+            <Location/>
+            <WeatherSelector/>
+            <ForecastContainer>
+                <ForecastHeader>
+                    3-Day Outlook
+                </ForecastHeader>
+                <DayContainer>
+                    {weatherRow}
+                </DayContainer>
+            </ForecastContainer>
+        </div>
+    )
 }

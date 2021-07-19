@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 
@@ -32,16 +32,28 @@ const WeatherHeader = styled.header `
     }
 `;
 
-export default class Header extends Component {
-    render() {
-        return (
-            <div>
-                <WeatherHeader>
-                    <Link to='/'>
-                        Weather on Demand
-                    </Link>
-                </WeatherHeader>
-            </div>
-        )
-    }
+// export default class Header extends Component {
+//     render() {
+//         return (
+//             <div>
+//                 <WeatherHeader>
+//                     <Link to='/'>
+//                         Weather on Demand
+//                     </Link>
+//                 </WeatherHeader>
+//             </div>
+//         )
+//     }
+// }
+
+export default function Header() {
+    return (
+        <div>
+            <WeatherHeader>
+                <Link to='/'>
+                    Weather on Demand
+                </Link>
+            </WeatherHeader>
+        </div>
+    )
 }

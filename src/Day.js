@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {useContext} from 'react'
 import styled from 'styled-components'
 import WeatherContext from './weatherContext'
 
@@ -48,12 +48,56 @@ const DayContainer = styled.div `
    text-align: center;
 `;
 
-export default class Day extends Component {
+// export default class Day extends Component {
 
-    static contextType = WeatherContext;
+//     static contextType = WeatherContext;
+
+//     //format date as mm/dd
+//     truncDate = (date) => {
+//         const dateSplit = date.split('');
+//         const dateArray = [];
+
+//         for (let i = 0; i <= dateSplit.length; i++) {
+//             if (i > 5) {
+//                 if (dateSplit[i] === "-") {
+//                     dateSplit[i] = "/";
+//                 }
+//                 dateArray.push(dateSplit[i])
+//             }
+//         }
+//         return dateArray.join('')
+//     }
+
+//     render() {
+//         const {id} = this.props;
+//         const {forecastday} = this.context.weather.forecast;
+//         const forecastDate = this.truncDate(forecastday[id].date);
+//         const highTemp = Math.trunc(forecastday[id].day.maxtemp_f);
+//         const lowTemp = Math.trunc(forecastday[id].day.mintemp_f);
+//         const icon = forecastday[id].day.condition.icon;
+
+//         return (
+//             <div>
+//                 <WeatherContainer>
+//                     <DayContainer>
+//                         {id === 0 && <Date>Today</Date>}
+//                         {id !== 0 && <Date>{forecastDate}</Date>}
+//                         <HighTemp>{highTemp}&#176;</HighTemp>
+//                         <LowTemp>{lowTemp}&#176;</LowTemp>
+//                         <ConditionIcon src={icon}/>
+//                     </DayContainer>
+//                 </WeatherContainer>
+//             </div>
+//         )
+//     }
+// }
+
+export default function Day(props) {
+
+    const weatherContext = useContext(WeatherContext);
 
     //format date as mm/dd
-    truncDate = (date) => {
+    const truncDate = (date) => {
         const dateSplit = date.split('');
         const dateArray = [];
 
@@ -67,27 +111,29 @@ export default class Day extends Component {
         }
         return dateArray.join('')
     }
+    const {id} = props;
+    const {date, maxtemp_f, mintemp_f, condition }= weatherContext.weather.forecast.forecastday[id].day;
+    // const forecastDate = truncDate(forecastday[id].date);
+    // const highTemp = Math.trunc(forecastday[id].day.maxtemp_f);
+    // const lowTemp = Math.trunc(forecastday[id].day.mintemp_f);
+    // const icon = forecastday[id].day.condition.icon;
 
-    render() {
-        const {id} = this.props
-        const {forecastday} = this.context.weather.forecast;
-        const forecastDate = this.truncDate(forecastday[id].date);
-        const highTemp = Math.trunc(forecastday[id].day.maxtemp_f);
-        const lowTemp = Math.trunc(forecastday[id].day.mintemp_f);
-        const icon = forecastday[id].day.condition.icon;
+    const forecastDate = truncDate(date);
+    const highTemp = Math.trunc(maxtemp_f);
+    const lowTemp = Math.trunc(mintemp_f);
+    const icon = condition.icon;
 
-        return (
-            <div>
-                <WeatherContainer>
-                    <DayContainer>
-                        {this.props.id === 0 && <Date>Today</Date>}
-                        {this.props.id !== 0 && <Date>{forecastDate}</Date>}
-                        <HighTemp>{highTemp}&#176;</HighTemp>
-                        <LowTemp>{lowTemp}&#176;</LowTemp>
-                        <ConditionIcon src={icon}/>
-                    </DayContainer>
-                </WeatherContainer>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <WeatherContainer>
+                <DayContainer>
+                    {id === 0 && <Date>Today</Date>}
+                    {id !== 0 && <Date>{forecastDate}</Date>}
+                    <HighTemp>{highTemp}&#176;</HighTemp>
+                    <LowTemp>{lowTemp}&#176;</LowTemp>
+                    <ConditionIcon src={icon}/>
+                </DayContainer>
+            </WeatherContainer>
+        </div>
+    )
 }

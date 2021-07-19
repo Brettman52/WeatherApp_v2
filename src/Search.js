@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {useContext} from 'react'
 import styled from 'styled-components'
 import Button from '@material-ui/core/Button'
 import WeatherContext from './weatherContext'
@@ -24,28 +24,56 @@ const SubmitButton = styled(Button)`
 }
 `;
 
-export default class Search extends Component {
+// export default class Search extends Component {
 
-    static contextType = WeatherContext;
+//     static contextType = WeatherContext;
 
-    cityInput = React.createRef()
+//     cityInput = React.createRef()
 
-    onSubmit = e => {
+//     onSubmit = e => {
+//         e.preventDefault()
+//         this
+//             .context
+//             .onSearch(this.cityInput.current.value)
+//         e
+//             .target
+//             .reset();
+//     }
+
+//     render() {
+//         return (
+//             <div>
+//                 <CityForm onSubmit={this.onSubmit}>
+//                     <CityInput ref={this.cityInput} placeholder="Search city or zip code"/>
+//                     <SubmitButton type="submit">
+//                         GO
+//                     </SubmitButton>
+//                 </CityForm>
+//             </div>
+//         )
+//     }
+// }
+
+export default function Search() {
+
+    const cityInput = React.createRef()
+
+    const {onSearch} = useContext(WeatherContext)
+
+    const onSubmit = e => {
         e.preventDefault()
-        this.context.onSearch(this.cityInput.current.value)
+        onSearch(cityInput.current.value)
         e.target.reset();
     }
-
-    render() {
-        return (
-            <div>
-                <CityForm onSubmit={this.onSubmit}>
-                    <CityInput ref={this.cityInput} placeholder="Search city or zip code"/>
-                    <SubmitButton type="submit">
-                        GO
-                    </SubmitButton>
-                </CityForm>
-            </div>
-        )
-    }
+    
+    return (
+        <div>
+            <CityForm onSubmit={onSubmit}>
+                <CityInput ref={cityInput} placeholder="Search city or zip code"/>
+                <SubmitButton type="submit">
+                    GO
+                </SubmitButton>
+            </CityForm>
+        </div>
+    )
 }

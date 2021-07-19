@@ -1,16 +1,21 @@
-import React, {Component} from 'react'
-import WeatherContext from './weatherContext'
+import React from 'react'
 import Search from './Search'
 
-export default class Homepage extends Component {
+// export default class Homepage extends Component {
 
-    static contextType = WeatherContext
+//     render() {
+//         return (
+//             <div>
+//                 <Search/>
+//             </div>
+//         )
+//     }
+// }
 
-    render() {
-        return (
-            <div>
-                <Search/>
-            </div>
-        )
-    }
+export default function Homepage() {
+    return (
+        <div>
+            <Search/>
+        </div>
+    )
 }
