@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import CurrentCast from './CurrentCast'
 import Search from './Search'
+import WeatherContext from './weatherContext'
 
 // export default class CurrentCastPage extends Component {
 
@@ -15,6 +16,7 @@ import Search from './Search'
 // }
 
 export default function CurrentCastPage() {
+    const weatherContext = useContext(WeatherContext)
     return (
         <div>
             <Search/>

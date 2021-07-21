@@ -111,14 +111,17 @@ export default function Day(props) {
         }
         return dateArray.join('')
     }
-    const {id} = props;
-    const {date, maxtemp_f, mintemp_f, condition }= weatherContext.weather.forecast.forecastday[id].day;
-    // const forecastDate = truncDate(forecastday[id].date);
+
+    // const forecastDate = truncDate(weatherContext.weather.forecast.forecastday[id].date);
     // const highTemp = Math.trunc(forecastday[id].day.maxtemp_f);
     // const lowTemp = Math.trunc(forecastday[id].day.mintemp_f);
     // const icon = forecastday[id].day.condition.icon;
 
-    const forecastDate = truncDate(date);
+    const {id} = props;
+    const {maxtemp_f, mintemp_f, condition }= weatherContext.weather.forecast.forecastday[id].day;
+    const {date} = weatherContext.weather.forecast.forecastday[id]
+    
+    const forecastDate = truncDate(date)
     const highTemp = Math.trunc(maxtemp_f);
     const lowTemp = Math.trunc(mintemp_f);
     const icon = condition.icon;

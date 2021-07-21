@@ -97,10 +97,10 @@ import WeatherContext from './weatherContext'
 
 export default function LocalDataProvider(props) {
 
-    const [weatherStore, setWeatherStore] = useState({searching: false, error: null, weather: null});
+    const [weatherStore,
+        setWeatherStore] = useState({searching: false, error: null, weather: null});
     const {searching, error, weather} = weatherStore;
-    const {setInitOnError, onWeatherUpdate, init, locSearch, path} = props;
-
+    const {setInitOnError, onWeatherUpdate, init, locSearch, path,onSearch} = props;
 
     const formatQueryParams = params => {
         const queryItems = Object
@@ -109,6 +109,12 @@ export default function LocalDataProvider(props) {
         return queryItems.join("&");
     }
     const fetchWeather = async() => {
+
+        if (locSearch === "" || locSearch === " ") {
+            setWeatherStore({error: "Enter a search to continue..."});
+            setInitOnError();
+            return;
+        }
 
         const params = {
             q: locSearch,
@@ -136,27 +142,30 @@ export default function LocalDataProvider(props) {
             onWeatherUpdate();
         }
     }
-    
-    // fetchWeather used only when page is refreshed(in this instance)
+
+    // fetchWeather used only when page is refreshed on any page other than the
+    // homepage (in this instance)
     useEffect(() => {
         if (!init && path === '/') 
             return;
         fetchWeather();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    }, [])
 
+    // fetch weather when the go button is pressed
     useEffect(() => {
-        if(!init)
-             return;
+        if (!init) 
+            return;
         fetchWeather();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [init])
 
     const contextValue = {
         searching: searching,
         error: error,
         weather: weather,
-        onSearch: props.onSearch
+        onSearch: onSearch
+
     }
     return (
         <WeatherContext.Provider value={contextValue}>

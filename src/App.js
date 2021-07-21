@@ -86,7 +86,7 @@ export const STORAGE_KEY = 'search';
 
     export default function App() {
     
-        let history = useHistory();
+    let history = useHistory();
  
     const [dataHold, setDataHold] = useState({
         search: localStorage.getItem(STORAGE_KEY),
@@ -96,7 +96,7 @@ export const STORAGE_KEY = 'search';
     const {search, init} = dataHold;
 
     const onSearch = value => {
-        setDataHold({search: value, init: true})
+        setDataHold({search: value.trim(), init: true})
     }
 
     const setInitOnError = () => {
