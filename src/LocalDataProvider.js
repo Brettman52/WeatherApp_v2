@@ -139,14 +139,11 @@ export default function LocalDataProvider(props) {
     
     // fetchWeather used only when page is refreshed(in this instance)
     useEffect(() => {
-        
-
         if (!init && path === '/') 
             return;
         fetchWeather();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
-
 
     useEffect(() => {
         if(!init)
