@@ -20,7 +20,9 @@ const Wrap = styled.div `
   height: 100vh;
   min-width: 250px;
 `
+
 export const STORAGE_KEY = 'search';
+
 // class App extends Component {
 
 //     state = {
@@ -58,7 +60,7 @@ export const STORAGE_KEY = 'search';
 //             <Wrap>
 //                 <Header/>
 //                 <LocalDataProvider
-//                     search={this.state.search}
+//                     locSearch={this.state.search}
 //                     setInitOnError={this.setInitOnError}
 //                     init={this.state.init}
 //                     onWeatherUpdate={this.onWeatherUpdate}
@@ -84,6 +86,9 @@ export const STORAGE_KEY = 'search';
 //     }
 // }
 
+// export default withRouter(App)
+
+
     export default function App() {
     
     let history = useHistory();
@@ -93,11 +98,20 @@ export const STORAGE_KEY = 'search';
         init: false
     })
 
-    const {search, init} = dataHold;
+    // const [searchData, setSearchData] = useState({search: localStorage.getItem(STORAGE_KEY)})
 
+    const {search, init} = dataHold;
+    console.log("from app state " + search)
+    console.log("from app in localStorage " + localStorage.getItem(STORAGE_KEY))
+   
     const onSearch = value => {
-        setDataHold({search: value.trim(), init: true})
+        setDataHold({search: value, init: true})
     }
+
+    // const onSearch = value => {
+    //     setDataHold({init: true})
+    //     setSearchData({search: value})
+    // }
 
     const setInitOnError = () => {
         setDataHold({init: false})
@@ -116,12 +130,12 @@ export const STORAGE_KEY = 'search';
         }
         setDataHold({init: false})
     }
-
     return (
         <Wrap>
             <Header/>
             <LocalDataProvider
                 locSearch={search}
+                // locSearch={searchData.search}
                 setInitOnError={setInitOnError}
                 init={init}
                 onWeatherUpdate={onWeatherUpdate}

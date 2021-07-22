@@ -106,11 +106,13 @@ export default function Day(props) {
                 if (dateSplit[i] === "-") {
                     dateSplit[i] = "/";
                 }
-                dateArray.push(dateSplit[i])
+                dateArray.push(dateSplit[i]);
             }
         }
-        return dateArray.join('')
+        return dateArray.join('');
     }
+
+    console.log(weatherContext)
 
     // const forecastDate = truncDate(weatherContext.weather.forecast.forecastday[id].date);
     // const highTemp = Math.trunc(forecastday[id].day.maxtemp_f);
@@ -119,9 +121,9 @@ export default function Day(props) {
 
     const {id} = props;
     const {maxtemp_f, mintemp_f, condition }= weatherContext.weather.forecast.forecastday[id].day;
-    const {date} = weatherContext.weather.forecast.forecastday[id]
+    const {date} = weatherContext.weather.forecast.forecastday[id];
     
-    const forecastDate = truncDate(date)
+    const forecastDate = truncDate(date);
     const highTemp = Math.trunc(maxtemp_f);
     const lowTemp = Math.trunc(mintemp_f);
     const icon = condition.icon;

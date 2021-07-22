@@ -97,10 +97,17 @@ import WeatherContext from './weatherContext'
 
 export default function LocalDataProvider(props) {
 
-    const [weatherStore,
-        setWeatherStore] = useState({searching: false, error: null, weather: null});
+    console.log("from LDP props " + props.locSearch)
+
+    const [weatherStore, setWeatherStore] = useState({searching: false, error: null, weather: null});
     const {searching, error, weather} = weatherStore;
     const {setInitOnError, onWeatherUpdate, init, locSearch, path,onSearch} = props;
+
+    const params = {
+        q: locSearch,
+        days: 3,
+        key: config.API_KEY
+    };
 
     const formatQueryParams = params => {
         const queryItems = Object
@@ -116,11 +123,7 @@ export default function LocalDataProvider(props) {
             return;
         }
 
-        const params = {
-            q: locSearch,
-            days: 3,
-            key: config.API_KEY
-        };
+        console.log("from params " + params.q)
 
         const url = encodeURI(config.API_ENDPOINT + "?" + formatQueryParams(params));
         setWeatherStore({searching: true})
@@ -139,6 +142,7 @@ export default function LocalDataProvider(props) {
                 searching: false
             })
             localStorage.setItem(STORAGE_KEY, locSearch)
+            console.log("Right after it's set in LDP " + localStorage.search)
             onWeatherUpdate();
         }
     }
@@ -165,8 +169,9 @@ export default function LocalDataProvider(props) {
         error: error,
         weather: weather,
         onSearch: onSearch
-
     }
+
+    
     return (
         <WeatherContext.Provider value={contextValue}>
             {props.children}

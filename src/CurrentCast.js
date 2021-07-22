@@ -141,19 +141,6 @@ const LocalTime = styled.span `
 
 export default function CurrentCast() {
 
-    
-    const weatherContext = useContext(WeatherContext);
-    const {last_updated, temp_f} = weatherContext.weather.current;
-    const {maxtemp_f, mintemp_f} = weatherContext.weather.forecast.forecastday[0].day;
-    const {text, icon} = weatherContext.weather.current.condition;
-
-    // Convert extracted time from 24-hour format to 12-hour format
-       const getLastUpdated = (timeDate) => {
-            const extractedTime = timeDate.split(' ')[1]
-
-            return moment(extractedTime, "HH:mm::ss").format("h:mmA");
-    }
-
     // const lastUpdated = getLastUpdated(weatherContext.weather.current.last_updated);
     // const currentTemp = Math.trunc(weatherContext.weather.current.temp_f);
     // const conditionText = weatherContext.weather.current.condition.text;
@@ -161,12 +148,25 @@ export default function CurrentCast() {
     // const lowTemp = Math.trunc(weatherContext.weather.forecast.forecastday[0].day.mintemp_f);
     // const icon = weatherContext.weather.current.condition.icon;
 
+     // Convert extracted time from 24-hour format to 12-hour format
+       const getLastUpdated = (timeDate) => {
+            const extractedTime = timeDate.split(' ')[1]
+
+            return moment(extractedTime, "HH:mm::ss").format("h:mmA");
+    }
+    
+    const weatherContext = useContext(WeatherContext);
+    const {last_updated, temp_f} = weatherContext.weather.current;
+    const {maxtemp_f, mintemp_f} = weatherContext.weather.forecast.forecastday[0].day;
+    const {text, icon} = weatherContext.weather.current.condition;
     const lastUpdated = getLastUpdated(last_updated);
     const currentTemp = Math.trunc(temp_f);
     const conditionText = text;
     const highTemp = Math.trunc(maxtemp_f);
     const lowTemp = Math.trunc(mintemp_f);
     const weatherIcon = icon;
+
+   
 
      // Test code 53646543 to exhibit conditional rendering based on available
     // information This code will render the following [city, country] instead of
