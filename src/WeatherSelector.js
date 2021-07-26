@@ -48,23 +48,6 @@ const CastList = styled.div `
     }
 `;
 
-// export default class WeatherSelector extends Component {
-//     render() {
-//         return (
-//             <div>
-//                 <CastList>
-//                     <NavLink to='/current'>
-//                         Currently
-//                     </NavLink>
-//                     <NavLink to='/daily'>
-//                         Daily
-//                     </NavLink>
-//                 </CastList>
-//             </div>
-//         )
-//     }
-// }
-
 export default function WeatherSelector() {
     return (
         <div>

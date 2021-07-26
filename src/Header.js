@@ -32,20 +32,6 @@ const WeatherHeader = styled.header `
     }
 `;
 
-// export default class Header extends Component {
-//     render() {
-//         return (
-//             <div>
-//                 <WeatherHeader>
-//                     <Link to='/'>
-//                         Weather on Demand
-//                     </Link>
-//                 </WeatherHeader>
-//             </div>
-//         )
-//     }
-// }
-
 export default function Header() {
     return (
         <div>

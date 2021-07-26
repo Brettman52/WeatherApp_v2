@@ -49,35 +49,6 @@ const DayContainer = styled.div `
     align-items: center;
 `;
 
-// export default class DailyCast extends Component {
-
-//     static contextType = WeatherContext;
-
-//     render() {
-//         const weatherRow = this
-//             .context
-//             .weather
-//             .forecast
-//             .forecastday
-//             .map((_, i) => <Day key={i} id={i}/>)
-
-//         return (
-//             <div>
-//                 <Location/>
-//                 <WeatherSelector/>
-//                 <ForecastContainer>
-//                     <ForecastHeader>
-//                         3-Day Outlook
-//                     </ForecastHeader>
-//                     <DayContainer>
-//                         {weatherRow}
-//                     </DayContainer>
-//                 </ForecastContainer>
-//             </div>
-//         )
-//     }
-// }
-
 export default function DailyCast() {
     const weatherContext = useContext(WeatherContext);
     const weatherRow = weatherContext

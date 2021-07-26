@@ -24,42 +24,10 @@ const SubmitButton = styled(Button)`
 }
 `;
 
-// export default class Search extends Component {
-
-//     static contextType = WeatherContext;
-
-//     cityInput = React.createRef()
-
-//     onSubmit = e => {
-//         e.preventDefault()
-//         this
-//             .context
-//             .onSearch(this.cityInput.current.value)
-//         e
-//             .target
-//             .reset();
-//     }
-
-//     render() {
-//         return (
-//             <div>
-//                 <CityForm onSubmit={this.onSubmit}>
-//                     <CityInput ref={this.cityInput} placeholder="Search city or zip code"/>
-//                     <SubmitButton type="submit">
-//                         GO
-//                     </SubmitButton>
-//                 </CityForm>
-//             </div>
-//         )
-//     }
-// }
-
 export default function Search() {
 
     const cityInput = React.createRef()
-
     const {onSearch} = useContext(WeatherContext)
-
     const onSubmit = e => {
         e.preventDefault()
         onSearch(cityInput.current.value)

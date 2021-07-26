@@ -31,33 +31,10 @@ const AreaContainer = styled.div `
     }
 `;
 
-// export default class Location extends Component {
-
-//     static contextType = WeatherContext;
-
-//     render() {
-//         const townName = this.context.weather.location.name;
-//         const regionName = this.context.weather.location.region;
-//         const countryName = this.context.weather.location.country;
-//         return (
-//             <div>
-//                 <AreaContainer>
-//                     <Town>
-//                         {townName},{regionName
-//                             ? <Region>{regionName}</Region>
-//                             : <Country>{countryName}</Country>}
-//                     </Town>
-//                 </AreaContainer>
-//             </div>
-//         )
-//     }
-// }
-
 export default function Location() {
 
     const weatherContext = useContext(WeatherContext);
     const {name, country, region} = weatherContext.weather.location;
-
     const townName = name;
     const regionName = region;
     const countryName = country;

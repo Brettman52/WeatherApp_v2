@@ -16,22 +16,6 @@ const ErrorMessage = styled.div `
     word-wrap: break-word;
 `;
 
-// export default class Error extends Component {
-//     render() {
-//         if (this.props.error) {
-//             return (
-//                 <div>
-//                     <Search/>
-//                     <ErrorMessage>
-//                         {this.props.error}
-//                     </ErrorMessage>
-//                 </div>
-//             )
-//         }
-//         return null;
-//     }
-// }
-
 export default function Error(props) {
     if (props.error) {
         return (
