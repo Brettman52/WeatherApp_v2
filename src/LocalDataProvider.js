@@ -3,9 +3,9 @@ import {config} from './config'
 import {STORAGE_KEY} from './App'
 import WeatherContext from './weatherContext'
 
+
 export default function LocalDataProvider(props) {
 
-    console.log("from LDP props " + props.locSearch)
 
     const [weatherStore, setWeatherStore] = useState({searching: false, error: null, weather: null});
     const {searching, error, weather} = weatherStore;
@@ -31,8 +31,6 @@ export default function LocalDataProvider(props) {
             return;
         }
 
-        console.log("from params " + params.q)
-
         const url = encodeURI(config.API_ENDPOINT + "?" + formatQueryParams(params));
         setWeatherStore({searching: true})
         const resp = await fetch(url, {method: "GET"})
@@ -50,7 +48,6 @@ export default function LocalDataProvider(props) {
                 searching: false
             })
             localStorage.setItem(STORAGE_KEY, locSearch)
-            console.log("Right after it's set in LDP " + localStorage.search)
             onWeatherUpdate();
         }
     }
